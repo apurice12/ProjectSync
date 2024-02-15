@@ -10,4 +10,5 @@ public class ProjectSyncBackendApplication {
 		SpringApplication.run(ProjectSyncBackendApplication.class, args);
 	}
             int x;
+	        int y; // scris de pe laptopul de munca
 }
