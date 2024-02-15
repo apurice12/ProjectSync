@@ -30,7 +30,7 @@ const LoginRegisterPage = () => {
         <hr />
         <br />
         <h2>
-          🤝 Conect: Find your ideal project partner with ease! ProjectSync connects you with collaborators who can elevate your project to new heights.
+          🤝 Connect: Find your ideal project partner with ease! ProjectSync connects you with collaborators who can elevate your project to new heights.
         </h2>
         <br />
         <h2>
