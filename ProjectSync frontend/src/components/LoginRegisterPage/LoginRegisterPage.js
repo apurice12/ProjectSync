@@ -29,31 +29,31 @@ const LoginRegisterPage = () => {
         </h1>
         <hr />
         <br />
-        <h2>
+        <h3>
           🤝 Connect: Find your ideal project partner with ease! ProjectSync connects you with collaborators who can elevate your project to new heights.
-        </h2>
+        </h3>
         <br />
-        <h2>
+        <h3>
           🌐 Diversity: Embrace the richness of diverse perspectives! Our platform brings together students from various disciplines, backgrounds, and experiences, fostering a melting pot of ideas that fuels creativity and ingenuity.
-        </h2>
+        </h3>
         <br />
-        <h2>
+        <h3>
           🚀 Ignite Innovation: Unleash your full potential by working on projects that inspire you. ProjectSync is about unleashing creativity, problem-solving skills, and passion for learning.
-        </h2>
+        </h3>
         <br />
-        <h2>
+        <h3>
           🌐 Global Reach: Break down geographical barriers and collaborate with students worldwide. Expand your horizons, gain cross-cultural insights, and make connections that transcend borders.
-        </h2>
+        </h3>
       </div>}
       </section>
       <section id="section-contact">
            <div className="content-contact">
-           <h2><i class="bi bi-instagram"></i>  Instagram: Dive into our world of projects, behind-the-scenes looks, and daily inspiration. Follow us on Instagram [@ProjectSync] and be part of our visually creative journey.</h2>
+           <h3><i class="bi bi-instagram"></i>  Instagram: Dive into our world of projects, behind-the-scenes looks, and daily inspiration. Follow us on Instagram [@ProjectSync] and be part of our visually creative journey.</h3>
 <br />
-            <h2><i class="bi bi-discord"></i> Discord: Join our Discord community [ProjectSync Community]! It's the perfect place to discuss your ideas, get help from the community, and connect with like-minded individuals. Let's chat, share, and collaborate.
-<br /></h2>
+            <h3><i class="bi bi-discord"></i> Discord: Join our Discord community [ProjectSync Community]! It's the perfect place to discuss your ideas, get help from the community, and connect with like-minded individuals. Let's chat, share, and collaborate.
+<br /></h3>
 <br />
-<h2><i class="bi bi-tiktok"></i> TikTok: For quick tips, fun project insights, and engaging content, don't forget to check us out on TikTok [@ProjectSync]. Follow us for a dose of creativity and innovation in bite-sized videos.</h2>
+<h3><i class="bi bi-tiktok"></i> TikTok: For quick tips, fun project insights, and engaging content, don't forget to check us out on TikTok [@ProjectSync]. Follow us for a dose of creativity and innovation in bite-sized videos.</h3>
 <br />
            </div>
       </section>
