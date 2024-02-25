@@ -48,12 +48,12 @@ const LoginRegisterPage = () => {
       </section>
       <section id="section-contact">
            <div className="content-contact">
-           <h2><i class="bi bi-instagram"></i>  Instagram: Dive into our world of projects, behind-the-scenes looks, and daily inspiration. Follow us on Instagram [@ProjectSync] and be part of our visually creative journey.</h2>
+           <h2><i className="bi bi-instagram"></i>  Instagram: Dive into our world of projects, behind-the-scenes looks, and daily inspiration. Follow us on Instagram [@ProjectSync] and be part of our visually creative journey.</h2>
 <br />
-            <h2><i class="bi bi-discord"></i> Discord: Join our Discord community [ProjectSync Community]! It's the perfect place to discuss your ideas, get help from the community, and connect with like-minded individuals. Let's chat, share, and collaborate.
+            <h2><i className="bi bi-discord"></i> Discord: Join our Discord community [ProjectSync Community]! It's the perfect place to discuss your ideas, get help from the community, and connect with like-minded individuals. Let's chat, share, and collaborate.
 <br /></h2>
 <br />
-<h2><i class="bi bi-tiktok"></i> TikTok: For quick tips, fun project insights, and engaging content, don't forget to check us out on TikTok [@ProjectSync]. Follow us for a dose of creativity and innovation in bite-sized videos.</h2>
+<h2><i className="bi bi-tiktok"></i> TikTok: For quick tips, fun project insights, and engaging content, don't forget to check us out on TikTok [@ProjectSync]. Follow us for a dose of creativity and innovation in bite-sized videos.</h2>
 <br />
            </div>
       </section>
@@ -134,45 +134,74 @@ const LoginForm = () => {
     );
   };
 
-const RegisterForm = () => {
+  const RegisterForm = () => {
+    const [formData, setFormData] = useState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    });
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value,
+      }));
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      };
+  
+      try {
+        const response = await fetch('http://localhost:8080/api/v1/registration', requestOptions);
+        if (!response.ok) {
+          throw new Error('Failed to register. Please try again later.');
+        }
+        const data = await response.json();
+        console.log('Registration successful:', data);
+        // Handle successful registration here (e.g., redirect or show success message)
+      } catch (error) {
+        console.error('Registration error:', error);
+        // Handle registration error here (e.g., show error message)
+      }
+    };
+  
     return (
-      <div className="register-container" id="register">
+      <form className="register-container" id="register" onSubmit={handleSubmit}>
         <div className="top">
           <span>Have an account? <a href="#">Login</a></span>
           <header>Sign Up</header>
         </div>
         <div className="two-forms">
           <div className="input-box">
-            <input type="text" className="input-field" placeholder="Firstname" />
+            <input type="text" className="input-field" placeholder="Firstname" name="firstName" value={formData.firstName} onChange={handleChange} />
             <i className="bx bx-user"></i>
           </div>
           <div className="input-box">
-            <input type="text" className="input-field" placeholder="Lastname" />
+            <input type="text" className="input-field" placeholder="Lastname" name="lastName" value={formData.lastName} onChange={handleChange} />
             <i className="bx bx-user"></i>
           </div>
         </div>
         <div className="input-box">
-          <input type="text" className="input-field" placeholder="Email" />
+          <input type="text" className="input-field" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
           <i className="bx bx-envelope"></i>
         </div>
         <div className="input-box">
-          <input type="password" className="input-field" placeholder="Password" />
+          <input type="password" className="input-field" placeholder="Password" name="password" value={formData.password} onChange={handleChange} />
           <i className="bx bx-lock-alt"></i>
         </div>
         <div className="input-box">
           <input type="submit" className="submit" value="Register" />
         </div>
-        <div className="two-col">
-          <div className="one">
-            <input type="checkbox" id="register-check" />
-            <label htmlFor="register-check"> Remember Me</label>
-          </div>
-          <div className="two">
-            <a href="#">Terms & conditions</a>
-          </div>
-        </div>
-      </div>
+      </form>
     );
   };
+
 
 export default LoginRegisterPage;

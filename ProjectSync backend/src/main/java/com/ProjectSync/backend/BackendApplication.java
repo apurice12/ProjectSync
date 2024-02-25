@@ -1,13 +1,13 @@
-package com.projectsync.ProjectSync.backend;
+package com.ProjectSync.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectSyncBackendApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectSyncBackendApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
-            int x;
+
 }
