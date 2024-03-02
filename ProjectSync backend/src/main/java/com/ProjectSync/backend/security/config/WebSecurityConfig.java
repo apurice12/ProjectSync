@@ -1,6 +1,7 @@
 package com.ProjectSync.backend.security.config;
 
 
+import com.ProjectSync.backend.appuser.AppUser;
 import com.ProjectSync.backend.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**").permitAll()
+                .antMatchers("/api/v*/registration/**","/api/v*/users/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -42,9 +43,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .successHandler((request, response, authentication) -> {
+                    // The principal should be an instance of AppUser, given your UserDetails implementation
+                    Object principal = authentication.getPrincipal();
+                    String firstName = "";
+                    String lastName = "";
+                    Long id=null;
+
+                    if (principal instanceof AppUser) {
+                        AppUser appUser = (AppUser) principal;
+                        firstName = appUser.getFirstName(); // Get first name from AppUser
+                        lastName = appUser.getLastName(); // Get last name from AppUser
+                        id=appUser.getId();
+                    }
+
+                    // Construct a JSON response with the user's first name and last name
+                    String json = String.format(
+                            "{\"message\": \"Login successful\", \"firstName\": \"%s\", \"lastName\": \"%s\",\"id\": \"%s\"}",
+                            firstName, lastName, id);
+
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().write("{\"message\": \"Login successful\"}");
+                    response.getWriter().write(json);
                 })
                 .failureHandler((request, response, exception) -> {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

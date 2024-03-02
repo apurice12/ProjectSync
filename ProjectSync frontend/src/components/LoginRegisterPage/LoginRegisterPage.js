@@ -110,46 +110,52 @@ const NavBar = ({ setShowLogin }) => {
         password: '',
     });
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // Initialize navigate function
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCredentials(prevState => ({
+        setCredentials((prevState) => ({
             ...prevState,
             [name]: value,
         }));
     };
 
+    const constructFormData = () => {
+        const formData = new FormData();
+        formData.append('email', credentials.email);
+        formData.append('password', credentials.password);
+        return formData;
+    };
+
+    const handleLogin = async (formData) => {
+        const requestOptions = {
+            method: 'POST',
+            body: formData,
+        };
+
+        try {
+            const response = await fetch('http://localhost:8080/login', requestOptions);
+            if (!response.ok) {
+                throw new Error('Login failed. Please check your credentials.');
+            };
+            
+            
+
+    
+            navigate('/mainpage');
+        } catch (error) {
+            console.error('Login error:', error);
+            setError(error.message || 'An error occurred. Please try again.');
+        }
+    };
+
     const handleSubmit = async (e) => {
-      e.preventDefault();
-      setError(''); // Reset error message on new submission
-  
-      // Constructing form data
-      const formData = new FormData();
-      formData.append('email', credentials.email);
-      formData.append('password', credentials.password);
-  
-      const requestOptions = {
-          method: 'POST',
-          body: formData,
-          // Headers are not required for FormData as the browser sets it automatically
-          // including the boundary parameter
-      };
-  
-      try {
-          const response = await fetch('http://localhost:8080/login', requestOptions);
-          if (!response.ok) {
-              throw new Error('Login failed. Please check your credentials.');
-          }
-          // If the login is successful
-          console.log('Login successful:', await response.json());
-          navigate('/mainpage'); // Redirect to MainPage
-      } catch (error) {
-          console.error('Login error:', error);
-          setError(error.message || 'An error occurred. Please try again.');
-      }
-  };
-  
+        e.preventDefault();
+        setError('');
+
+        const formData = constructFormData();
+        await handleLogin(formData);
+    };
 
     return (
       <div className="login-container" id="login">
