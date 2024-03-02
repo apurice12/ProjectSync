@@ -8,6 +8,7 @@ import com.ProjectSync.backend.registration.token.ConfirmationToken;
 import com.ProjectSync.backend.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
+@CrossOrigin
 public class RegistrationService {
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;

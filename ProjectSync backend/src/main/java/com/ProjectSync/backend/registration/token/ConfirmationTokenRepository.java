@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
+@CrossOrigin
 public interface ConfirmationTokenRepository
         extends JpaRepository<ConfirmationToken, Long> {
 

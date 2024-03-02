@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 @Service
 @AllArgsConstructor
+@CrossOrigin
 public class EmailService implements EmailSender{
 
 

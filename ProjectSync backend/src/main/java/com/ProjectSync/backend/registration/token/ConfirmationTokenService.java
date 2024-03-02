@@ -2,12 +2,14 @@ package com.ProjectSync.backend.registration.token;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@CrossOrigin
 public class ConfirmationTokenService {
 
     private final ConfirmationTokenRepository confirmationTokenRepository;

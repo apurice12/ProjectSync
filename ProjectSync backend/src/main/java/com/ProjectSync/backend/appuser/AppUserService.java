@@ -8,12 +8,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@CrossOrigin
 public class AppUserService implements UserDetailsService {
     private final static String USER_NOT_FOUND_MSG="User with email %s not found";
     private final AppUserRepository appUserRepository;

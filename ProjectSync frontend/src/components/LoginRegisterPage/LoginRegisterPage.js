@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginRegisterPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginRegisterPage = () => {
   // State to toggle between login and registration forms
@@ -103,24 +104,73 @@ const NavBar = ({ setShowLogin }) => {
     );
   };
 
-const LoginForm = () => {
+  const LoginForm = () => {
+    const [credentials, setCredentials] = useState({
+        email: '',
+        password: '',
+    });
+    const [error, setError] = useState('');
+    const navigate = useNavigate(); // Initialize navigate function
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCredentials(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError(''); // Reset error message on new submission
+  
+      // Constructing form data
+      const formData = new FormData();
+      formData.append('email', credentials.email);
+      formData.append('password', credentials.password);
+  
+      const requestOptions = {
+          method: 'POST',
+          body: formData,
+          // Headers are not required for FormData as the browser sets it automatically
+          // including the boundary parameter
+      };
+  
+      try {
+          const response = await fetch('http://localhost:8080/login', requestOptions);
+          if (!response.ok) {
+              throw new Error('Login failed. Please check your credentials.');
+          }
+          // If the login is successful
+          console.log('Login successful:', await response.json());
+          navigate('/mainpage'); // Redirect to MainPage
+      } catch (error) {
+          console.error('Login error:', error);
+          setError(error.message || 'An error occurred. Please try again.');
+      }
+  };
+  
+
     return (
       <div className="login-container" id="login">
-        <div className="top">
-          <span>Don't have an account? <a href="#">Sign Up</a></span>
-          <header>Login</header>
-        </div>
-        <div className="input-box">
-          <input type="text" className="input-field" placeholder="Username or Email" />
-          <i className="bx bx-user"></i>
-        </div>
-        <div className="input-box">
-          <input type="password" className="input-field" placeholder="Password" />
-          <i className="bx bx-lock-alt"></i>
-        </div>
-        <div className="input-box">
-          <input type="submit" className="submit" value="Sign In" />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="top">
+            <span>Don't have an account? <a href="#">Sign Up</a></span>
+            <header>Login</header>
+          </div>
+          {error && <p className="error">{error}</p>} {/* Display any error message */}
+          <div className="input-box">
+            <input type="text" className="input-field" placeholder="Username or Email" name="email" value={credentials.email} onChange={handleChange} />
+            <i className="bx bx-user"></i>
+          </div>
+          <div className="input-box">
+            <input type="password" className="input-field" placeholder="Password" name="password" value={credentials.password} onChange={handleChange} />
+            <i className="bx bx-lock-alt"></i>
+          </div>
+          <div className="input-box">
+            <input type="submit" className="submit" value="Sign In" />
+          </div>
+        </form>
         <div className="two-col">
           <div className="one">
             <input type="checkbox" id="login-check" />
@@ -132,7 +182,8 @@ const LoginForm = () => {
         </div>
       </div>
     );
-  };
+};
+
 
   const RegisterForm = () => {
     const [formData, setFormData] = useState({
