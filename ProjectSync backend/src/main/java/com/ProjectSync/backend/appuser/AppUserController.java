@@ -1,21 +1,22 @@
 package com.ProjectSync.backend.appuser;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
-@RequestMapping(path="api/v1/users")
+@RequiredArgsConstructor // Lombok annotation to generate a constructor for final fields (for dependency injection)
+@RequestMapping(path = "api/v1/users")
 public class AppUserController {
-    @Autowired
-    private AppUserRepository appUserRepository;
-    @GetMapping(path="{id}")
-    public Optional<AppUser> getUserById(@PathVariable Long id){
-        return appUserRepository.findById(id);
-    }
+    private final AppUserRepository appUserRepository; // Using final for @RequiredArgsConstructor
 
+    @GetMapping(path = "{id}")
+    public ResponseEntity<AppUser> getUserById(@PathVariable Long id) {
+        return appUserRepository.findById(id)
+                .map(user -> ResponseEntity.ok(user)) // If user is found, return 200 OK with the user
+                .orElseGet(() -> ResponseEntity.notFound().build()); // If not found, return 404 Not Found
+    }
 }

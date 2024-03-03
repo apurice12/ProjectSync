@@ -3,6 +3,7 @@ package com.ProjectSync.backend.appuser;
 import com.ProjectSync.backend.registration.token.ConfirmationToken;
 import com.ProjectSync.backend.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,6 +31,7 @@ public class AppUserService implements UserDetailsService {
                         new UsernameNotFoundException(
                                 String.format(USER_NOT_FOUND_MSG, email)));
     }
+
 
     public String signUpUser(AppUser appUser) {
         boolean userExists = appUserRepository
@@ -69,4 +72,6 @@ public class AppUserService implements UserDetailsService {
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
     }
+
+
 }
