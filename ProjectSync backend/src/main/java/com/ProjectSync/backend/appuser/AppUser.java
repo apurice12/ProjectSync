@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
-@CrossOrigin
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -66,6 +66,9 @@ public class AppUser implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+    public Long getId() {
+        return id;
     }
 
     @Override

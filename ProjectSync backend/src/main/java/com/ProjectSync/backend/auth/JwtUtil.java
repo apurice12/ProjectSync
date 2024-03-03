@@ -5,9 +5,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 @Component
@@ -20,14 +23,22 @@ public class JwtUtil {
     private long expirationTime;
 
     public String generateToken(AppUser appUser) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("firstName", appUser.getFirstName());
+        claims.put("lastName", appUser.getLastName());
+        claims.put("email", appUser.getEmail());
+        claims.put("role",appUser.getAppUserRole());
+        // You can add more custom claims here as needed
+
         return Jwts.builder()
-                .claim("firstName", appUser.getFirstName())
-                .claim("lastName", appUser.getLastName())
-                .setSubject(appUser.getEmail())
+                .setClaims(claims)
+                .setSubject(appUser.getEmail()) // Using email as the subject
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact();
     }
+
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -50,8 +61,8 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, String username) {
-        final String extractedUsername = extractUsername(token);
-        return (extractedUsername.equals(username) && !isTokenExpired(token));
+    public Boolean validateToken(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }

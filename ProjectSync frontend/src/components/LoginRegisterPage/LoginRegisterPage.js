@@ -104,39 +104,52 @@ const NavBar = ({ setShowLogin }) => {
     );
   };
 
- const LoginForm = ({ onSuccess }) => {
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const LoginForm = ({ onSuccess }) => {
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials),
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCredentials((prev) => ({ ...prev, [name]: value }));
     };
 
-    try {
-      const response = await fetch('http://localhost:8080/api/v1/login', requestOptions);
-      if (!response.ok) {
-        throw new Error('Login failed. Please check your credentials.');
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError('');
+    
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      };
+    
+      try {
+        const response = await fetch('http://localhost:8080/login', requestOptions);
+    
+        // Log the response for debugging
+        console.log('Login response:', response);
+    
+        if (!response.ok) {
+          throw new Error('Login failed. Please check your credentials.');
+        }
+    
+        const data = await response.json();
+    
+        // Log the received token for debugging
+        console.log('Received JWT token:', data.token);
+    
+        // Store the token in local storage
+        localStorage.setItem('jwtToken', data.token);
+    
+        // Redirect to '/mainpage'
+        navigate('/mainpage');
+      } catch (error) {
+        console.error('Login error:', error);
+        setError(error.message || 'An error occurred. Please try again.');
       }
-      const data = await response.json();
-      localStorage.setItem('jwtToken', data.token);
-      onSuccess(); // Trigger success action (e.g., redirect)
-    } catch (error) {
-      console.error('Login error:', error);
-      setError(error.message || 'An error occurred. Please try again.');
-    }
-  };
+    };
+    
 
     return (
         <div className="login-container" id="login">
@@ -147,7 +160,7 @@ const NavBar = ({ setShowLogin }) => {
                 </div>
                 {error && <p className="error">{error}</p>}
                 <div className="input-box">
-                    <input type="email" className="input-field" placeholder="Username" name="username" value={credentials.username} onChange={handleChange} required />
+                    <input type="email" className="input-field" placeholder="Email" name="email" value={credentials.email} onChange={handleChange} required />
                     <i className="bx bx-envelope"></i>
                 </div>
                 <div className="input-box">
