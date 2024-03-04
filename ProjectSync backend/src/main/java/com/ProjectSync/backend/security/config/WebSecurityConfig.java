@@ -3,6 +3,7 @@ package com.ProjectSync.backend.security.config;
 import com.ProjectSync.backend.appuser.AppUserService;
 import com.ProjectSync.backend.auth.JwtRequestFilter;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,18 +19,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-@CrossOrigin
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -37,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtRequestFilter jwtRequestFilter;
     private static final Logger log = LoggerFactory.getLogger(WebSecurityConfig.class);
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -52,18 +50,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
                 .logoutUrl("/logout") // specify the logout URL
                 .logoutSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
                     // Perform additional actions upon successful logout
                     // For example, you can send a custom response or log information
-                    log.info("User successfully logged out: " + authentication.getName());
+                    log.info("User successfully logged out: " + authentication.getDetails());
                     httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                });
+                })
+                .and()
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -83,8 +80,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             }
         };
     }
-
-
 
     @Override
     @Bean // Expose AuthenticationManager as a bean

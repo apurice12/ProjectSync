@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoginRegisterPage.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,31 +30,31 @@ const LoginRegisterPage = () => {
         </h1>
         <hr />
         <br />
-        <h2>
+        <h4>
           🤝 Connect: Find your ideal project partner with ease! ProjectSync connects you with collaborators who can elevate your project to new heights.
-        </h2>
+        </h4>
         <br />
-        <h2>
+        <h4>
           🌐 Diversity: Embrace the richness of diverse perspectives! Our platform brings together students from various disciplines, backgrounds, and experiences, fostering a melting pot of ideas that fuels creativity and ingenuity.
-        </h2>
+        </h4>
         <br />
-        <h2>
+        <h4>
           🚀 Ignite Innovation: Unleash your full potential by working on projects that inspire you. ProjectSync is about unleashing creativity, problem-solving skills, and passion for learning.
-        </h2>
+        </h4>
         <br />
-        <h2>
+        <h4>
           🌐 Global Reach: Break down geographical barriers and collaborate with students worldwide. Expand your horizons, gain cross-cultural insights, and make connections that transcend borders.
-        </h2>
+        </h4>
       </div>}
       </section>
       <section id="section-contact">
            <div className="content-contact">
-           <h2><i className="bi bi-instagram"></i>  Instagram: Dive into our world of projects, behind-the-scenes looks, and daily inspiration. Follow us on Instagram [@ProjectSync] and be part of our visually creative journey.</h2>
+           <h4><i className="bi bi-instagram"></i>  Instagram: Dive into our world of projects, behind-the-scenes looks, and daily inspiration. Follow us on Instagram [@ProjectSync] and be part of our visually creative journey.</h4>
 <br />
-            <h2><i className="bi bi-discord"></i> Discord: Join our Discord community [ProjectSync Community]! It's the perfect place to discuss your ideas, get help from the community, and connect with like-minded individuals. Let's chat, share, and collaborate.
-<br /></h2>
+            <h4><i className="bi bi-discord"></i> Discord: Join our Discord community [ProjectSync Community]! It's the perfect place to discuss your ideas, get help from the community, and connect with like-minded individuals. Let's chat, share, and collaborate.
+<br /></h4>
 <br />
-<h2><i className="bi bi-tiktok"></i> TikTok: For quick tips, fun project insights, and engaging content, don't forget to check us out on TikTok [@ProjectSync]. Follow us for a dose of creativity and innovation in bite-sized videos.</h2>
+<h4><i className="bi bi-tiktok"></i> TikTok: For quick tips, fun project insights, and engaging content, don't forget to check us out on TikTok [@ProjectSync]. Follow us for a dose of creativity and innovation in bite-sized videos.</h4>
 <br />
            </div>
       </section>
@@ -108,48 +108,57 @@ const NavBar = ({ setShowLogin }) => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const navigate = useNavigate();
-
+  
+    useEffect(() => {
+      const token = localStorage.getItem('jwtToken');
+      if (token) {
+        // User is already logged in, redirect to the main page
+        navigate('/mainpage');
+      }
+    }, [navigate]);
+  
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCredentials((prev) => ({ ...prev, [name]: value }));
+      const { name, value } = e.target;
+      setCredentials((prev) => ({ ...prev, [name]: value }));
     };
-
+  
     const handleSubmit = async (e) => {
       e.preventDefault();
       setError('');
-    
+  
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
       };
-    
+
       try {
         const response = await fetch('http://localhost:8080/login', requestOptions);
-    
+  
         // Log the response for debugging
         console.log('Login response:', response);
-    
+  
         if (!response.ok) {
           throw new Error('Login failed. Please check your credentials.');
         }
-    
+  
         const data = await response.json();
-    
+  
         // Log the received token for debugging
         console.log('Received JWT token:', data.token);
-    
+  
         // Store the token in local storage
         localStorage.setItem('jwtToken', data.token);
-    
+  
         // Redirect to '/mainpage'
         navigate('/mainpage');
       } catch (error) {
         console.error('Login error:', error);
         setError(error.message || 'An error occurred. Please try again.');
       }
+  
     };
-    
+ 
 
     return (
         <div className="login-container" id="login">
@@ -242,6 +251,7 @@ const NavBar = ({ setShowLogin }) => {
           <input type="submit" className="submit" value="Register" />
         </div>
       </form>
+      
     );
   };
 
