@@ -1,0 +1,16 @@
+/* MainPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.css');
+
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full viewport height */
+    text-align: center; /* Center text specifically */
+    background-color: #151922;
+    color: white;
+  }
