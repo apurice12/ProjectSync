@@ -1,5 +1,6 @@
 package com.ProjectSync.backend.auth;
 
+import com.ProjectSync.backend.appuser.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,8 +39,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if (jwt != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            String username = jwtUtil.extractUsername(jwt); // Extract username from token
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            String email = jwtUtil.extractEmail(jwt); // Extract username from token
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(String.valueOf(email));
 
             if (jwtUtil.validateToken(jwt, userDetails)) { // Corrected to pass userDetails
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

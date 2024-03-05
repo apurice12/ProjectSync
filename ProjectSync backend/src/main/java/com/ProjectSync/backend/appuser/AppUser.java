@@ -1,6 +1,8 @@
 package com.ProjectSync.backend.appuser;
 
 
+import com.ProjectSync.backend.comment.Comment;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,12 +10,11 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -43,7 +44,9 @@ public class AppUser implements UserDetails {
     private AppUserRole appUserRole;
     private Boolean locked = false;
     private Boolean enabled = false;
-
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Comment> comments;
     public AppUser(String firstName,
                    String lastName,
                    String email,

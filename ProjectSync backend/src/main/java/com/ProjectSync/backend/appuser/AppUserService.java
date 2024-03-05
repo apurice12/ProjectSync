@@ -3,6 +3,7 @@ package com.ProjectSync.backend.appuser;
 import com.ProjectSync.backend.registration.token.ConfirmationToken;
 import com.ProjectSync.backend.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -71,7 +73,7 @@ public class AppUserService implements UserDetailsService {
         return appUserRepository.enableAppUser(email);
     }
 
-    public Optional<AppUser> getUserById(Long userId) {
-        return appUserRepository.findById(userId);
-    }
+
+
+
 }

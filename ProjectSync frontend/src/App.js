@@ -4,13 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginRegisterPage from './components/LoginRegisterPage/LoginRegisterPage';
 import MainPage from './components/MainPage/MainPage'; // Adjust the import path as necessary
 
+
 const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
           <Route path="/" element={<LoginRegisterPage />} />
-          <Route path="/mainpage" element={<MainPage />} /> {/* Add this line */}       
+          <Route path="/mainpage" element={<MainPage />} /> {/* Add this line */}  
         </Routes>
       </div>
     </BrowserRouter>

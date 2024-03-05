@@ -28,11 +28,12 @@ public class JwtUtil {
         claims.put("lastName", appUser.getLastName());
         claims.put("email", appUser.getEmail());
         claims.put("role",appUser.getAppUserRole());
+        claims.put("id", appUser.getId());
         // You can add more custom claims here as needed
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(appUser.getEmail()) // Using email as the subject
+                .setSubject(String.valueOf((appUser.getId())))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
@@ -42,6 +43,12 @@ public class JwtUtil {
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+    public String extractEmail(String token) {
+        return extractClaim(token, claims -> claims.get("email", String.class));
+    }
+    public Long extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("id", Long.class));
     }
 
     public Date extractExpiration(String token) {
