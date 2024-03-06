@@ -39,6 +39,7 @@ public class AppUser implements UserDetails {
     private String firstName;
     private String lastName;
     private String email;
+    private String screenName;
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
@@ -47,16 +48,19 @@ public class AppUser implements UserDetails {
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Comment> comments;
-    public AppUser(String firstName,
-                   String lastName,
-                   String email,
-                   String password,
-                   AppUserRole appUserRole) {
+
+
+
+
+
+    public AppUser(String firstName, String lastName, String email, String screenName, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.screenName = screenName;
         this.appUserRole = appUserRole;
+
     }
 
     @Override
@@ -79,6 +83,9 @@ public class AppUser implements UserDetails {
         return email;
     }
 
+     public String getScreenName(){
+        return screenName;
+     }
     public String getFirstName() {
         return firstName;
     }
@@ -86,6 +93,7 @@ public class AppUser implements UserDetails {
     public String getLastName() {
         return lastName;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

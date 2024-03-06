@@ -29,6 +29,10 @@ public class Comment {
     @JsonBackReference
     private AppUser appUser;
 
+    @Column(columnDefinition = "TEXT")
+    private String screenName;
+
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 

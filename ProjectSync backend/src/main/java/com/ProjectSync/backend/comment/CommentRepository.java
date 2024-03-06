@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> findByAppUserId(Long userId);
+
     List<Comment> findByAppUserEmail(String email);
 
 

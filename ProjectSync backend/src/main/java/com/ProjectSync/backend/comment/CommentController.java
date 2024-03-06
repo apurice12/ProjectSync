@@ -29,13 +29,13 @@ public class CommentController {
     }
 
     // Assuming a need to fetch comments by user email
-    @GetMapping("/user/{email}")
-    public ResponseEntity<List<Comment>> getCommentsByUserEmail(@PathVariable String email) {
+    @GetMapping("/user/{email}/")
+    public ResponseEntity<List<Comment>> getCommentsByUserEmail(@PathVariable String email ) {
         List<Comment> comments = commentService.getCommentsByUserEmail(email);
         return ResponseEntity.ok(comments);
     }
 
-    @PostMapping("/user/{email}/comments")
+    @PostMapping("/user/{email}")
     public ResponseEntity<?> createComment(@PathVariable String email, @RequestBody Comment comment) {
         try {
             Comment createdComment = commentService.createComment(email, comment);
