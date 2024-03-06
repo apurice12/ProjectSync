@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 110vh;
+    min-height: 100vh;
     background: rgba(39, 39, 39, 0.4);
 }
 .nav{
@@ -34,25 +34,19 @@
     line-height: 100px;
     background: linear-gradient(rgba(39,39,39, 0.6), transparent);
     z-index: 100;
+    gap:16%;
+    
 }
 .nav-logo p{
     color: white;
     font-size: 25px;
     font-weight: 600;
 }
-.nav-menu ul{
-    display: flex;
-}
+
 .nav-menu ul li{
     list-style-type: none;
 }
-.nav-menu ul li .link{
-    text-decoration: none;
-    font-weight: 500;
-    color: #fff;
-    padding-bottom: 15px;
-    margin: 0 25px;
-}
+
 .link:hover, .active{
     border-bottom: 2px solid #fff;
 }
@@ -248,64 +242,7 @@ header{
         gap: 0;
     }
 }
-#section-about{
-        background-image: url("/about-section2.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        overflow: hidden;
-        height: 110vh;
-        padding-right: 20px; /* Adjust the padding as needed */
-    
-}
-.content-about {
-    text-align: left;
-    position: relative;
-    top: 45%;
-    left: 55%;
-    transform: translate(0, -50%);
-    color: white;
-    max-width: 35%; /* Adjust the maximum width as needed */
-}
-#section-about h1 {
-    font-size: 1.35em; /* Adjust the font size as needed */
-    margin: 0; /* Remove default margin */
-}
 
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    #section-about {
-      justify-content: center; /* Center content for smaller screens */
-    }
-
-    .content-about {
-      margin: 0; /* Reset margin for smaller screens */
-    }
-  }
-
-  #section-contact{
-    background-image: url("/contact-sect.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    overflow: hidden;
-    height: 100vh;
-    padding-right: 20px; /* Adjust the padding as needed */
-
-}
-.content-contact {
-    text-align: left;
-    position: relative;
-    top: 50%;
-    left: 10%;
-    transform: translate(0, -50%);
-    color: white;
-    max-width: 35%; /* Adjust the maximum width as needed */
-}
-#section-contact h1 {
-    font-size: 1.35em; /* Adjust the font size as needed */
-    margin: 0; /* Remove default margin */
-}
 .error{
     display: flex;
     justify-content: center;

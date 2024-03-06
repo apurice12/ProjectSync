@@ -14,51 +14,14 @@ const LoginRegisterPage = () => {
   return (
     <div className="app">
       <NavBar setShowLogin={setShowLogin} scrollToSection={scrollToSection} />
-      <section id="section-home">
+
         <div className="section1">
           <div className="wrapper">
             {showLogin ? <LoginForm /> : <RegisterForm />}
           </div>
         </div>
-      </section>
-      {/* Other sections remain unchanged */}
-      <section id="section-about">
-        {<div className="content-about">
-        <br />
-        <h1 style={{ marginLeft: '20%' }}>
-          ProjectSync: Your Collaboration Hub! 🚀
-        </h1>
-        <hr />
-        <br />
-        <h4>
-          🤝 Connect: Find your ideal project partner with ease! ProjectSync connects you with collaborators who can elevate your project to new heights.
-        </h4>
-        <br />
-        <h4>
-          🌐 Diversity: Embrace the richness of diverse perspectives! Our platform brings together students from various disciplines, backgrounds, and experiences, fostering a melting pot of ideas that fuels creativity and ingenuity.
-        </h4>
-        <br />
-        <h4>
-          🚀 Ignite Innovation: Unleash your full potential by working on projects that inspire you. ProjectSync is about unleashing creativity, problem-solving skills, and passion for learning.
-        </h4>
-        <br />
-        <h4>
-          🌐 Global Reach: Break down geographical barriers and collaborate with students worldwide. Expand your horizons, gain cross-cultural insights, and make connections that transcend borders.
-        </h4>
-      </div>}
-      </section>
-      <section id="section-contact">
-           <div className="content-contact">
-           <h4><i className="bi bi-instagram"></i>  Instagram: Dive into our world of projects, behind-the-scenes looks, and daily inspiration. Follow us on Instagram [@ProjectSync] and be part of our visually creative journey.</h4>
-<br />
-            <h4><i className="bi bi-discord"></i> Discord: Join our Discord community [ProjectSync Community]! It's the perfect place to discuss your ideas, get help from the community, and connect with like-minded individuals. Let's chat, share, and collaborate.
-<br /></h4>
-<br />
-<h4><i className="bi bi-tiktok"></i> TikTok: For quick tips, fun project insights, and engaging content, don't forget to check us out on TikTok [@ProjectSync]. Follow us for a dose of creativity and innovation in bite-sized videos.</h4>
-<br />
-           </div>
-      </section>
-    </div>
+      </div>
+      
   );
 };
 
@@ -83,18 +46,7 @@ const NavBar = ({ setShowLogin }) => {
           <p>ProjectSync.</p>
         </div>
         <div className="nav-menu" id="navMenu">
-          <ul>
-            <li><a href="#section-about" className="link" onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#section-about');
-            }}>About</a></li>
-            <li>
-              <a href="#section-contact" className="link" onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#section-contact');
-              }}>Contact</a>
-            </li>
-          </ul>
+          
         </div>
         <div className="nav-button">
           <button className="btn white-btn" onClick={() => handleAuthAction(true)}>Sign In</button>
@@ -190,6 +142,7 @@ const NavBar = ({ setShowLogin }) => {
       firstName: '',
       lastName: '',
       email: '',
+      screenName:'',
       password: '',
     });
   
@@ -239,10 +192,17 @@ const NavBar = ({ setShowLogin }) => {
             <i className="bx bx-user"></i>
           </div>
         </div>
+        <div className="two-forms">
         <div className="input-box">
           <input type="text" className="input-field" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
           <i className="bx bx-envelope"></i>
+          </div>
+          <div className="input-box">
+            <input type="text" className="input-field" placeholder="Username" name="screenName" value={formData.screenName} onChange={handleChange} />
+            <i className="bx bx-user"></i>
+          </div>
         </div>
+        
         <div className="input-box">
           <input type="password" className="input-field" placeholder="Password" name="password" value={formData.password} onChange={handleChange} />
           <i className="bx bx-lock-alt"></i>
