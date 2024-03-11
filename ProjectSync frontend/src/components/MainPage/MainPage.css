@@ -5,37 +5,15 @@
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
 
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-  border-radius: 3px; 
-}
 
-
-::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 3px; 
-}
-
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-
-::-webkit-scrollbar {
-  width: 8px; 
-}
-
-.centered-content {
-    
-    min-height: 100vh;
+.main-content {
     
     background-color: #151922;
     color: white;
   }
 .container{
   background-color: #151922;
-  margin-top: 1.5rem;
+
 }
 .row{
   background-color: #151922;
@@ -44,89 +22,50 @@
   background-color: #151922;
 }
 .card{
-  background-color: #151922;
-  border-color: white;
-  border-radius: 3px;
+  background-color: #151822 !important;
+  border-color: white !important;
+  border-radius: 3px !important;
+
 }
 
-.inline-content {
-  display: flex;
-  align-items: center; 
-  flex-wrap: wrap; 
-  gap: 4px; 
-  margin-bottom: 5rem;
-}
-
-.inline-content h1 {
-  font-size: 2.9rem; /* Adjust size to fit in line, optional */
-  margin-bottom: 0; /* Remove margin to prevent extra space */
-}
-/* Styles the scrollbar track */
-.custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #f0f0f0; /* Soft gray for the track */
-  border-radius: 4px; /* Slightly rounded corners for the track */
-}
-
-/* Styles the scrollbar thumb */
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #b0b0b0; /* Darker gray for the thumb */
-  border-radius: 1px; /* Slightly rounded corners for the thumb */
-  border: 5px solid #f0f0f0; /* Same as the track color to create padding effect */
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2); /* Subtle inset shadow for depth */
-}
-
-/* Changes when hovering over the scrollbar thumb */
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #a0a0a0; /* Slightly darker on hover for better visibility */
-}
-
-/* Sets the width of the scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+.lead {
+  color: white; /* Adjust to fit your brand color */
 }
 
 
-
-.footer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 100px;
+#content-left{
+   margin-bottom: 10%;
+  
 }
-#sus{
-margin-top: 0;
-padding-top: 0;
-
-}
-.navbar {
-  background-color: transparent !important;
-  box-shadow: none !important; 
-}
-.navbar-light .navbar-nav .nav-link {
-  color: #fff; 
-}
-.navbar-light .navbar-brand {
-  color: #fff; 
-  font-size:2rem;
+.line{
+  color:white;
 }
 
-.navbar-nav .nav-link {
-  margin-right: 5px; /* Adjust the value as needed */
-
-}
-.navbar-nav {
-  margin-left: 20px; /* Adjust the value as needed */
-  position: relative;
-  bottom: 2px;
+#viewpost-content{
+margin-bottom: 10%;
 }
 
-.navbar-nav .nav-link:hover {
-  color: #fff !important; /* Keeps the color white on hover */
-  text-decoration: underline;
+.countdown-container {
+  margin-top: 20px;
 }
-.round-image {
-  border-radius: 50%; /* Makes the image round */
-  width: 40px; /* Adjust based on your needs */
-  height: 40px; /* Adjust based on your needs */
-  object-fit: cover; /* Ensures the image covers the area without losing its aspect ratio */
+
+.countdown-label {
+  font-size: 18px;
+
+}
+
+.countdown-number {
+  font-size: 36px;
+  font-weight: bold;
+  color: #007bff; /* Change color as needed */
+  animation: countdownAnimation 1s ease-in-out infinite alternate;
+}
+
+@keyframes countdownAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.4);
+  }
 }

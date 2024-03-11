@@ -28,8 +28,14 @@ public class CommentController {
         return comments.isEmpty() ? ResponseEntity.ok("No comments available at the moment") : ResponseEntity.ok(comments);
     }
 
+    @GetMapping(path="/{category}")
+    public ResponseEntity<?> getComments(@PathVariable String category) {
+        List<Comment> comments = commentService.getCommentsByCategory(category);
+        return comments.isEmpty() ? ResponseEntity.ok("No comments available at the moment") : ResponseEntity.ok(comments);
+    }
+
     // Assuming a need to fetch comments by user email
-    @GetMapping("/user/{email}/")
+    @GetMapping(path="/user/{email}")
     public ResponseEntity<List<Comment>> getCommentsByUserEmail(@PathVariable String email ) {
         List<Comment> comments = commentService.getCommentsByUserEmail(email);
         return ResponseEntity.ok(comments);

@@ -30,6 +30,7 @@ public class JwtUtil {
         claims.put("role",appUser.getAppUserRole());
         claims.put("id", appUser.getId());
         claims.put("screenName", appUser.getScreenName());
+
         // You can add more custom claims here as needed
 
         return Jwts.builder()

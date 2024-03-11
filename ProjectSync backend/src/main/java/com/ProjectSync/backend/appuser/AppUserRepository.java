@@ -17,6 +17,8 @@ public interface AppUserRepository
     Optional<AppUser> findByEmail(String email);
     Optional<AppUser> findById(Long id);
 
+    Optional<AppUser>  findByScreenName(String screenName);
+
 
     @Transactional
     @Modifying

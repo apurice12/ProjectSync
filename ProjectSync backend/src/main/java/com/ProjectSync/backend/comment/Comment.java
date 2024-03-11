@@ -32,6 +32,14 @@ public class Comment {
     @Column(columnDefinition = "TEXT")
     private String screenName;
 
+    @Column
+    private String category;
+
+    @Column
+    private Long idAppuser;
+
+    @Column
+    private Integer Capacity;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;

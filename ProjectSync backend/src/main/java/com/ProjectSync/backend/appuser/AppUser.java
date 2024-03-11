@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -49,9 +50,9 @@ public class AppUser implements UserDetails {
     @JsonManagedReference
     private List<Comment> comments;
 
-
-
-
+    @Column(name = "profile_picture", columnDefinition = "bytea")
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] profilePicture;
 
     public AppUser(String firstName, String lastName, String email, String screenName, String password, AppUserRole appUserRole) {
         this.firstName = firstName;

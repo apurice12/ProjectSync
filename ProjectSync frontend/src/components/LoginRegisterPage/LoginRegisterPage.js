@@ -184,11 +184,11 @@ const NavBar = ({ setShowLogin }) => {
         </div>
         <div className="two-forms">
           <div className="input-box">
-            <input type="text" className="input-field" placeholder="Firstname" name="firstName" value={formData.firstName} onChange={handleChange} />
+            <input type="text" className="input-field" placeholder="First name" name="firstName" value={formData.firstName} onChange={handleChange} />
             <i className="bx bx-user"></i>
           </div>
           <div className="input-box">
-            <input type="text" className="input-field" placeholder="Lastname" name="lastName" value={formData.lastName} onChange={handleChange} />
+            <input type="text" className="input-field" placeholder="Last name" name="lastName" value={formData.lastName} onChange={handleChange} />
             <i className="bx bx-user"></i>
           </div>
         </div>

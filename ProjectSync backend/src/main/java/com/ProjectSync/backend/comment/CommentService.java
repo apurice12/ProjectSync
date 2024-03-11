@@ -7,6 +7,7 @@ import com.ProjectSync.backend.comment.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +28,14 @@ public class CommentService {
         return commentRepository.findAll(Sort.by(Sort.Direction.DESC, "createdDate"));
     }
 
+
     public List<Comment> getCommentsByUserEmail(String email) {
         return commentRepository.findByAppUserEmail(email);
     }
 
+    public List<Comment> getCommentsByCategory(String category) {
+        return commentRepository.findByCategoryOrderByCreatedDateDesc(category);
+    }
     public Optional<Comment> getCommentById(Long id) {
         return commentRepository.findById(id);
     }
