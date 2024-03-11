@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.css');
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+
+*{
+    font-size: 17px;
+}
+
+.line{
+    background-color: white;
+}
+
+
+
+.horizontal-scroll-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+  }
+  
+  .card-custom {
+    flex: 0 0 auto; 
+    min-width: 250px;
+    max-width: 100%;
+    
+  }
+  .grey-input {
+    background-color: #707070;
+    color: black;
+    border-color: black;
+
+  }
+  .scrollable-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+  }
+  
+  .scrollable-list {
+    overflow-y: auto;
+  }
+  
+  .person-info {
+    position: relative;
+    
+  }
+
+  .card-link1 {
+    position:absolute;
+   top:0;
+   right: 10%;
+  }
+  .independent-div{
+    margin-left: 10%;
+  }
+  .card-link-show{
+    margin-left: 10%;
+  }
+
+
+  #profile-picture{
+    border-radius: 50%; /* Makes the image round */
+    width: 200px; /* Adjust based on your needs */
+    height: 200px; /* Adjust based on your needs */
+    object-fit: cover;
+  }
+
+  .upload-buttons {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center-align the items horizontally */
+    gap: 2px; /* Space between elements */
+  }
+  
+  .upload-button-label {
+    background-color: white; /* Bootstrap primary color */
+    color: black;
+    padding: .25rem .5rem; /* Smaller padding to match btn-sm */
+    border-radius: .2rem; /* Slightly round the corners */
+    cursor: pointer;
+    font-size: .875rem; /* Match font size of btn-sm */
+    display: inline-block; /* Make it look like a button */
+    margin-top:5%;
+  }
+  
+  .upload-buttons button {
+    padding: .25rem .5rem; /* Adjust if necessary for alignment */
+    font-size: .875rem; /* Smaller font size for consistency */
+  }

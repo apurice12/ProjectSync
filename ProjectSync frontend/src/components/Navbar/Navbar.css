@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.css');
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+
+.navbar {
+    background-color: transparent !important;
+    box-shadow: none !important; 
+    padding: 1rem !important;
+    color: white !important;
+
+  }
+
+  .navbar-light .navbar-nav .nav-link {
+    color: #fff !important; 
+  
+  }
+  .navbar-light .navbar-brand {
+    color: #fff; 
+    font-size:2rem;
+  }
+  
+  .navbar-nav .nav-link {
+    margin-right: 5px; /* Adjust the value as needed */
+    color: white;
+  }
+  .navbar-nav {
+    margin-left: 20px; /* Adjust the value as needed */
+    position: relative;
+    bottom: 2px;
+    color: white;
+    gap:15px;
+  
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #fff !important; /* Keeps the color white on hover */
+ 
+  
+  }
