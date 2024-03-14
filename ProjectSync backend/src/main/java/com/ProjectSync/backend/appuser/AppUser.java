@@ -26,6 +26,7 @@ import java.util.List;
 public class AppUser implements UserDetails {
 
 
+    @Getter
     @SequenceGenerator(
             name = "user_sequence",
             sequenceName = "user_sequence",
@@ -37,9 +38,12 @@ public class AppUser implements UserDetails {
             generator = "user_sequence"
     )
     private Long id;
+    @Getter
     private String firstName;
+    @Getter
     private String lastName;
     private String email;
+    @Getter
     private String screenName;
     private String password;
     @Enumerated(EnumType.STRING)
@@ -75,24 +79,10 @@ public class AppUser implements UserDetails {
     public String getPassword() {
         return password;
     }
-    public Long getId() {
-        return id;
-    }
 
     @Override
     public String getUsername() {
         return email;
-    }
-
-     public String getScreenName(){
-        return screenName;
-     }
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
 

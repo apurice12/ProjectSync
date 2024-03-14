@@ -167,7 +167,6 @@ const ViewPosts = ({ userDetails }) => {
     }
   };
 
-
   return (
     <div className="container mt-2">
       <p className="latest-post">Latest Posts:</p>
@@ -276,6 +275,7 @@ const ViewPosts = ({ userDetails }) => {
                   </div>
                 </div>
               </div>
+              
             </div>
           ))
         ) : (

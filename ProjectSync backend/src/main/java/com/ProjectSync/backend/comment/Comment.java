@@ -1,9 +1,11 @@
 package com.ProjectSync.backend.comment;
 
+import com.ProjectSync.backend.Apply.Apply;
 import com.ProjectSync.backend.appuser.AppUser;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,9 @@ import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,8 +39,6 @@ public class Comment {
     @Column
     private String category;
 
-    @Column
-    private Long idAppuser;
 
     @Column
     private Integer Capacity;
@@ -46,5 +48,9 @@ public class Comment {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate = new Date(); // Initialize with the current Date
+
+
+
+
 }
 

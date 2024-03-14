@@ -240,6 +240,37 @@ const PostPage = ({ setActiveContent }) => {
       });
     }
   };
+  const applyToComment = async (commentId) => {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      navigate("/");
+      return;
+    }
+  
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/apply/${commentId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          appliant: userDetails.screenName,
+          content: "abc", // Predefined message
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to apply");
+      }
+  
+      alert("Applied successfully!");
+      // Optionally, refresh comments or applications to show changes
+    } catch (error) {
+      console.error("Error applying to comment:", error);
+    }
+  };
+
   return (
     <div className="container mt-2" id="sus">
     <div className="col-md-12" >
@@ -378,7 +409,10 @@ const PostPage = ({ setActiveContent }) => {
                           <div className="d-flex justify-content-between align-items-center">
                            {
   comment.screenName !== userDetails.screenName ? (
-    <button className="btn btn-success">Apply</button>
+    <button
+    className="btn btn-success"
+    onClick={() => applyToComment(comment.id)}
+    >Apply</button>
   ) : (
     <div style={{ width: 'auto', height: 'auto', visibility: 'hidden' }}>
       <button className="btn btn-success">Apply</button>

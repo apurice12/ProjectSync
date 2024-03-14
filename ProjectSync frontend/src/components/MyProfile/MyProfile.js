@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 const MyProfile = ({ userDetails }) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [applications, setApplications] = useState([]);
+  const [acceptedApplications, setAcceptedApplications] = useState([]);
   const [tempEditingText, setTempEditingText] = useState(""); // Temporary storage for editing text
   const [comments, setComments] = useState([]);
   const [editingCommentId, setEditingCommentId] = useState(null);
@@ -21,6 +23,22 @@ const MyProfile = ({ userDetails }) => {
     setTempEditingText(comment.content); // Initialize temporary editing text
     setShowModal(true);
   };
+  const handleShowApplications = async (commentId) => {
+    // Prevent default action if this function is called within an event handler
+    // e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/apply/by-comment/${commentId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch applications');
+      }
+      const applications = await response.json();
+      // Assuming applications is an array of objects where each object has an appliant property
+      setApplications(applications);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
   function handleFileChange(event) {
     const file = event.target.files[0]; // Get the selected file
     if (file) {
@@ -208,7 +226,36 @@ const MyProfile = ({ userDetails }) => {
     }
   };
  
-
+  const acceptApplication = async (appliantId) => {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      console.log("No token found, redirecting to login");
+      // navigate("/login"); // Uncomment if using react-router
+      return;
+    }
+  
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/apply/${appliantId}/accept`, {
+        method: 'PUT', // or 'PATCH', depending on what your API expects
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to accept application');
+      }
+  
+      console.log("Application accepted successfully");
+      navigate('/');
+      navigate('/myprofile');
+      // Optionally, refresh the list of applications or update the UI
+    } catch (error) {
+      console.error("Error accepting application:", error);
+    }
+  };
+  
   
   return (
     <div className="main container">
@@ -409,13 +456,8 @@ const MyProfile = ({ userDetails }) => {
                 >
                   Delete
                 </button>
-                <a
-                  href="#"
-                  className="card-link-show"
-                  onClick={scrollToApplications}
-                >
-                  Show applications
-                </a>
+                <button onClick={() => handleShowApplications(comment.id)}>Show applications</button>
+
               </div>
             </div>
           </div>
@@ -474,21 +516,26 @@ const MyProfile = ({ userDetails }) => {
       <br />
       <hr className="line" />
       <h4 ref={applicationsRef}>Aici vor aparea aplicantii:</h4>
-      <div class="grid-container">
-        <div class="scrollable-list">
-          <ul>
-            {persons.map((person, index) => (
-              <li key={index}>
-                <div class="person-info">
-                  <span>{person}</span>
-                  <a href="#" class="card-link1">
-                    View
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ul>
+<div className="grid-container">
+<div className="scrollable-list">
+  <ul>
+    {applications.map((application, index) => (
+      <li key={index}>
+        <div className="person-info">
+          <span>{application.appliant}</span> {/* Adjust `appliantName` based on your data structure */}
+          {application.accepted ? (
+            <button className="card-link1 btn btn-link" >Already accepted</button>
+          ) : (
+            <button className="card-link1 btn btn-link" onClick={() => acceptApplication(application.id)}>
+              Accept
+            </button>
+          )}
         </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
         <div class="independent-div">
           aici se va afisa continutul mesajului de aplicare de la user si tot de
           aici se va accepta sau nu colaborarea

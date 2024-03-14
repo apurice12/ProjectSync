@@ -67,8 +67,8 @@
 
   #profile-picture{
     border-radius: 50%; /* Makes the image round */
-    width: 200px; /* Adjust based on your needs */
-    height: 200px; /* Adjust based on your needs */
+    width: 250px; /* Adjust based on your needs */
+    height: 250px; /* Adjust based on your needs */
     object-fit: cover;
   }
 

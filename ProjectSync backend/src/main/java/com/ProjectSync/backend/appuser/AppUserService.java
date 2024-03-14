@@ -94,7 +94,7 @@ public class AppUserService implements UserDetailsService {
         BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
 
         // Resize the image to 200x200
-        BufferedImage resizedImage = resizeImage(originalImage, 250, 250);
+        BufferedImage resizedImage = resizeImage(originalImage, 800, 800);
 
         // Convert the resized image back to byte array
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

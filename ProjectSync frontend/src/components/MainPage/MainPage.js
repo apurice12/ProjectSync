@@ -8,6 +8,9 @@ import MyProfile from '../MyProfile/MyProfile';
 import Footer from '../Footer/Footer';
 import PostPage from '../PostPage/PostPage';
 import { Link } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
+import Collaborators from '../Collaborators/Collaborators';
+
 const MainPage = () => {
   const navigate = useNavigate();
   const [showCreatePostModal, setShowCreatePostModal] = useState(false);
@@ -69,7 +72,7 @@ const MainPage = () => {
       {activeContent === 'myprofile' && <MyProfile userDetails={userDetails} />}
       {activeContent === 'posts' && <PostPage setActiveContent={setActiveContent} />}
       {activeContent === 'contact' && <div>Contact Component or Content Here</div>}
-  
+      {activeContent === 'collaborators' && <Collaborators userDetails={userDetails} />}
       <div className="row h-120" id="main-page">
   {activeContent === 'home' && (
     <>
